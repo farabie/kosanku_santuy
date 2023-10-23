@@ -7,9 +7,11 @@ Color backgroundColor = const Color(0xffD4E3F7);
 Color blackColor = const Color(0xff000000);
 Color whiteColor = const Color(0xffFFFFFF);
 Color greyColor = const Color(0xffDEDEDE);
+Color greyColor2 = const Color(0xffF6F7F8);
 Color accentColor1 = const Color(0xffFF5C7D);
 Color accentColor2 = const Color(0xffDEDEDE);
 Color accentColor3 = const Color(0xffFFC006);
+Color accentColor4 = const Color(0xffFF9376);
 
 TextStyle blackTextFont = GoogleFonts.montserrat()
     .copyWith(color: blackColor, fontWeight: FontWeight.w600);
