@@ -44,6 +44,32 @@ class AuthServices {
       return SignInSignUpResult(message: errorMessage);
     }
   }
+
+  static Future<SignInSignUpResult> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        return SignInSignUpResult(message: "Login dengan Google dibatalkan");
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final auth.UserCredential result =
+          await _auth.signInWithCredential(credential);
+      final String fullName = googleUser.displayName ?? "No Name";
+
+      final User user = result.convertToUser(fullName: fullName);
+
+      return SignInSignUpResult(user: user);
+    } catch (e) {
+      return SignInSignUpResult(message: "Gagal masuk dengan Google: $e");
+    }
+  }
 }
 
 class SignInSignUpResult {
