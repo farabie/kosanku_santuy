@@ -1,11 +1,22 @@
 part of 'pages.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
   @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  bool isLoading = true;
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool isLoading = true;
     return Scaffold(
       backgroundColor: whiteColor,
       body: Column(
@@ -51,5 +62,46 @@ class SplashPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<Timer> startTimer() async {
+    return Timer(const Duration(seconds: 5), checkFirebaseUser);
+  }
+
+  void checkFirebaseUser() {
+    final firebaseUser = Provider.of<auth.User?>(context, listen: false);
+    if (firebaseUser == null) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => const LoginSosmedPage(),
+        ),
+      );
+    } else {
+      bool isGoogleSignIn = false;
+      for (var userInfo in firebaseUser.providerData) {
+        if (userInfo.providerId == 'google.com') {
+          isGoogleSignIn = true;
+          break;
+        }
+      }
+      if (isGoogleSignIn) {
+        print('User is authenticated with Google.');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+      } else {
+        print('User is not authenticated with Google.');
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const LoginSosmedPage(),
+          ),
+        );
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 }

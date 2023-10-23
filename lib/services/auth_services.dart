@@ -70,6 +70,13 @@ class AuthServices {
       return SignInSignUpResult(message: "Gagal masuk dengan Google: $e");
     }
   }
+
+  static Future<void> signOut() async {
+    await _auth.signOut();
+  }
+
+  //Fungsi Untuk Token nantinya
+  static Stream<auth.User?> get userStream => _auth.authStateChanges();
 }
 
 class SignInSignUpResult {
