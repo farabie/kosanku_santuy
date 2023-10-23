@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "399005012681",
+    "project_id": "santuy-kosanku",
+    "storage_bucket": "santuy-kosanku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399005012681:android:c871109a15b780b2483318",
+        "android_client_info": {
+          "package_name": "com.farabie.kosanku_santuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399005012681-21npnmrnc1dlp31jsdblem7icj4arj3b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.farabie.kosanku_santuy",
+            "certificate_hash": "a4c7e7e601f82517c1028fc7ad194416aa942cc7"
+          }
+        },
+        {
+          "client_id": "399005012681-d85nfsmlmh016ovi50ppbo7e4f4lekjc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAperPX-jMh63pP4qNxhknUdKnYL6fosbg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399005012681-d85nfsmlmh016ovi50ppbo7e4f4lekjc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
