@@ -10,4 +10,15 @@ class UserServices {
       'fullName': user.fullName,
     });
   }
+
+  static Future<User> getUser(String id) async {
+    DocumentSnapshot snapshot = await _userCollection.doc(id).get();
+    Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+
+    return User(
+      id,
+      data?['email'] ?? "",
+      fullName: data?['fullName'] ?? "",
+    );
+  }
 }

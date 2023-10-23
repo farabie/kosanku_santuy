@@ -25,6 +25,25 @@ class AuthServices {
       }
     }
   }
+
+  static Future<SignInSignUpResult> signIn(
+      String email, String password) async {
+    try {
+      auth.UserCredential result = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      User user = await result.fromFireStore();
+      return SignInSignUpResult(user: user);
+    } catch (e) {
+      String errorMessage = 'Email dan Password Salah Coba Masukan Lagi';
+      if (e is auth.FirebaseAuthException) {
+        if (e.code == 'firebase_auth/INVALID_LOGIN_CREDENTIALS') {
+          errorMessage =
+              "Kredensial login tidak valid. Periksa email dan kata sandi Anda.";
+        }
+      }
+      return SignInSignUpResult(message: errorMessage);
+    }
+  }
 }
 
 class SignInSignUpResult {
