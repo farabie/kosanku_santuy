@@ -211,7 +211,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                           ),
                           CustomCircleSosmed(
-                            imageAsset: "assets/logo_apple.png",
+                            imageAsset: "assets/images/logo_apple.png",
                             onTap: () {},
                           ),
                         ],
