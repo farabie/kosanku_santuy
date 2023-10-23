@@ -8,6 +8,8 @@ Color blackColor = const Color(0xff000000);
 Color whiteColor = const Color(0xffFFFFFF);
 Color greyColor = const Color(0xffDEDEDE);
 Color greyColor2 = const Color(0xffF6F7F8);
+Color greyColor3 = const Color(0xff82868E);
+
 Color accentColor1 = const Color(0xffFF5C7D);
 Color accentColor2 = const Color(0xffDEDEDE);
 Color accentColor3 = const Color(0xffFFC006);
