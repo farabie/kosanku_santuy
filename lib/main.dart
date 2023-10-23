@@ -12,7 +12,7 @@ class KosanKuSantuy extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      home: LoginSosmedPage(),
     );
   }
 }
