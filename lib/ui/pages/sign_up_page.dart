@@ -1,8 +1,8 @@
 part of 'pages.dart';
 
 class SignUpPage extends StatefulWidget {
-  // RegistrationData registrationData;
-  SignUpPage({Key? key}) : super(key: key);
+  RegistrationData registrationData;
+  SignUpPage({Key? key, required this.registrationData}) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -13,12 +13,12 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fullNameController.text = widget.registrationData.fullName;
-  //   emailController.text = widget.registrationData.email;
-  // }
+  @override
+  void initState() {
+    super.initState();
+    fullNameController.text = widget.registrationData.fullName;
+    emailController.text = widget.registrationData.email;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,51 +122,53 @@ class _SignUpPageState extends State<SignUpPage> {
                       CustomButton(
                         nameButton: "Sign Up",
                         onTap: () async {
-                          // if (!(fullNameController.text.trim() != "" &&
-                          //     emailController.text.trim() != "" &&
-                          //     passwordController.text.trim() != "")) {
-                          //   Flushbar(
-                          //     duration: const Duration(milliseconds: 1500),
-                          //     flushbarPosition: FlushbarPosition.TOP,
-                          //     backgroundColor: const Color(0xFFFF5C83),
-                          //     message: "Please fill all the fields",
-                          //   ).show(context);
-                          // } else if (passwordController.text.length < 6) {
-                          //   Flushbar(
-                          //     duration: const Duration(milliseconds: 1500),
-                          //     flushbarPosition: FlushbarPosition.TOP,
-                          //     backgroundColor: const Color(0xFFFF5C83),
-                          //     message: "Password's length min 6 characters",
-                          //   ).show(context);
-                          // } else if (!EmailValidator.validate(
-                          //     emailController.text)) {
-                          //   Flushbar(
-                          //     duration: const Duration(milliseconds: 1500),
-                          //     flushbarPosition: FlushbarPosition.TOP,
-                          //     backgroundColor: const Color(0xFFFF5C83),
-                          //     message: "Wrong formatted email address",
-                          //   ).show(context);
-                          // } else {
-                          //   widget.registrationData = RegistrationData(
-                          //     fullName: fullNameController.text,
-                          //     email: emailController.text,
-                          //     password: passwordController.text,
-                          //   );
+                          if (!(fullNameController.text.trim() != "" &&
+                              emailController.text.trim() != "" &&
+                              passwordController.text.trim() != "")) {
+                            Flushbar(
+                              duration: const Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: const Color(0xFFFF5C83),
+                              message: "Please fill all the fields",
+                            ).show(context);
+                          } else if (passwordController.text.length < 6) {
+                            Flushbar(
+                              duration: const Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: const Color(0xFFFF5C83),
+                              message: "Password's length min 6 characters",
+                            ).show(context);
+                          } else if (!EmailValidator.validate(
+                              emailController.text)) {
+                            Flushbar(
+                              duration: const Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: const Color(0xFFFF5C83),
+                              message: "Wrong formatted email address",
+                            ).show(context);
+                          } else {
+                            widget.registrationData = RegistrationData(
+                              fullName: fullNameController.text,
+                              email: emailController.text,
+                              password: passwordController.text,
+                            );
 
-                          //   SignInSignUpResult result =
-                          //       await AuthServices.signUp(
-                          //     emailController.text,
-                          //     passwordController.text,
-                          //     fullNameController.text,
-                          //   );
-                          //   if (result.user == null) {
-                          //     print(result.message);
-                          //   } else {
-                          //     print(result.user.toString());
-                          //     Get.offAll(() => ProfilePage(
-                          //         registrationData: widget.registrationData));
-                          //   }
-                          // }
+                            SignInSignUpResult result =
+                                await AuthServices.signUp(
+                              emailController.text,
+                              passwordController.text,
+                              fullNameController.text,
+                            );
+                            if (result.user == null) {
+                              print(result.message);
+                            } else {
+                              print(result.user.toString());
+
+                              Get.offAll(() => HomePage(
+                                    registrationData: widget.registrationData,
+                                  ));
+                            }
+                          }
                         },
                       ),
                       const SizedBox(
@@ -194,20 +196,20 @@ class _SignUpPageState extends State<SignUpPage> {
                           CustomCircleSosmed(
                             imageAsset: "assets/images/logo_google.png",
                             onTap: () async {
-                              // final result =
-                              //     await AuthServices.signInWithGoogle();
-                              // if (result.user != null) {
-                              //   Get.off(() => ProfilePage(
-                              //         fullNameSosmed: result.user?.fullName,
-                              //       ));
-                              // } else {
-                              //   final errorMessage = result.message ??
-                              //       "Terjadi kesalahan saat masuk dengan Google";
-                              //   ScaffoldMessenger.of(context)
-                              //       .showSnackBar(SnackBar(
-                              //     content: Text(errorMessage),
-                              //   ));
-                              // }
+                              final result =
+                                  await AuthServices.signInWithGoogle();
+                              if (result.user != null) {
+                                Get.off(() => HomePage(
+                                      fullNameSosmed: result.user?.fullName,
+                                    ));
+                              } else {
+                                final errorMessage = result.message ??
+                                    "Terjadi kesalahan saat masuk dengan Google";
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(errorMessage),
+                                ));
+                              }
                             },
                           ),
                           CustomCircleSosmed(
@@ -229,9 +231,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Get.to(
-                              //   () => const SignInPage(),
-                              // );
+                              Get.to(
+                                () => const SignInPage(),
+                              );
                             },
                             child: Text(
                               " Sign In ",

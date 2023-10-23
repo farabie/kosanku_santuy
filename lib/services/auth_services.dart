@@ -34,7 +34,7 @@ class AuthServices {
       User user = await result.fromFireStore();
       return SignInSignUpResult(user: user);
     } catch (e) {
-      String errorMessage = 'Email dan Password Salah Coba Masukan Lagi';
+      String errorMessage = 'Incorrect Email and Password Try Entering Again';
       if (e is auth.FirebaseAuthException) {
         if (e.code == 'firebase_auth/INVALID_LOGIN_CREDENTIALS') {
           errorMessage =

@@ -10,7 +10,7 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
-    // RegistrationData registrationData = RegistrationData();
+    RegistrationData registrationData = RegistrationData();
     TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
 
@@ -105,45 +105,51 @@ class _SignInPageState extends State<SignInPage> {
                       CustomButton(
                         nameButton: "Sign In",
                         onTap: () async {
-                          // if (!(emailController.text.trim() != "" &&
-                          //     passwordController.text.trim() != "")) {
-                          //   Flushbar(
-                          //     duration: const Duration(milliseconds: 1500),
-                          //     flushbarPosition: FlushbarPosition.TOP,
-                          //     backgroundColor: const Color(0xFFFF5C83),
-                          //     message: "Please fill all the fields",
-                          //   ).show(context);
-                          // } else if (passwordController.text.length < 6) {
-                          //   Flushbar(
-                          //     duration: const Duration(milliseconds: 1500),
-                          //     flushbarPosition: FlushbarPosition.TOP,
-                          //     backgroundColor: const Color(0xFFFF5C83),
-                          //     message: "Password's length min 6 characters",
-                          //   ).show(context);
-                          // } else if (!EmailValidator.validate(
-                          //     emailController.text)) {
-                          //   Flushbar(
-                          //     duration: const Duration(milliseconds: 1500),
-                          //     flushbarPosition: FlushbarPosition.TOP,
-                          //     backgroundColor: const Color(0xFFFF5C83),
-                          //     message: "Wrong formatted email address",
-                          //   ).show(context);
-                          // } else {
-                          //   SignInSignUpResult result =
-                          //       await AuthServices.signIn(
-                          //     emailController.text,
-                          //     passwordController.text,
-                          //   );
+                          if (!(emailController.text.trim() != "" &&
+                              passwordController.text.trim() != "")) {
+                            Flushbar(
+                              duration: const Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: const Color(0xFFFF5C83),
+                              message: "Please fill all the fields",
+                            ).show(context);
+                          } else if (passwordController.text.length < 6) {
+                            Flushbar(
+                              duration: const Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: const Color(0xFFFF5C83),
+                              message: "Password's length min 6 characters",
+                            ).show(context);
+                          } else if (!EmailValidator.validate(
+                              emailController.text)) {
+                            Flushbar(
+                              duration: const Duration(milliseconds: 1500),
+                              flushbarPosition: FlushbarPosition.TOP,
+                              backgroundColor: const Color(0xFFFF5C83),
+                              message: "Wrong formatted email address",
+                            ).show(context);
+                          } else {
+                            SignInSignUpResult result =
+                                await AuthServices.signIn(
+                              emailController.text,
+                              passwordController.text,
+                            );
 
-                          //   if (result.user != null) {
-                          //     Get.off(() => ProfilePage(
-                          //           registrationData: registrationData,
-                          //           fullNameFromLogin: result.user?.fullName,
-                          //         ));
-                          //   } else {
-                          //     print(result.message);
-                          //   }
-                          // }
+                            if (result.user != null) {
+                              Get.off(() => HomePage(
+                                    registrationData: registrationData,
+                                    fullNameFromLogin: result.user?.fullName,
+                                  ));
+                            } else {
+                              Flushbar(
+                                duration: const Duration(milliseconds: 1500),
+                                flushbarPosition: FlushbarPosition.TOP,
+                                backgroundColor: const Color(0xFFFF5C83),
+                                message: result.message,
+                              ).show(context);
+                              // print(result.message);
+                            }
+                          }
                         },
                       ),
                       const SizedBox(
@@ -171,20 +177,20 @@ class _SignInPageState extends State<SignInPage> {
                           CustomCircleSosmed(
                             imageAsset: "assets/images/logo_google.png",
                             onTap: () async {
-                              // final result =
-                              //     await AuthServices.signInWithGoogle();
-                              // if (result.user != null) {
-                              //   Get.off(() => ProfilePage(
-                              //         fullNameSosmed: result.user?.fullName,
-                              //       ));
-                              // } else {
-                              //   final errorMessage = result.message ??
-                              //       "Terjadi kesalahan saat masuk dengan Google";
-                              //   ScaffoldMessenger.of(context)
-                              //       .showSnackBar(SnackBar(
-                              //     content: Text(errorMessage),
-                              //   ));
-                              // }
+                              final result =
+                                  await AuthServices.signInWithGoogle();
+                              if (result.user != null) {
+                                Get.off(() => HomePage(
+                                      fullNameSosmed: result.user?.fullName,
+                                    ));
+                              } else {
+                                final errorMessage = result.message ??
+                                    "Terjadi kesalahan saat masuk dengan Google";
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(errorMessage),
+                                ));
+                              }
                             },
                           ),
                           CustomCircleSosmed(
@@ -206,14 +212,14 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           GestureDetector(
                             onTap: () async {
-                              // Get.to(
-                              //   () => SignUpPage(
-                              //     registrationData: registrationData,
-                              //   ),
-                              // );
+                              Get.to(
+                                () => SignUpPage(
+                                  registrationData: registrationData,
+                                ),
+                              );
                             },
                             child: Text(
-                              " Sign In ",
+                              " Sign Up ",
                               style: blueTextFont.copyWith(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600,

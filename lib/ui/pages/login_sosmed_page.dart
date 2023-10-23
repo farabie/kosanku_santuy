@@ -8,6 +8,7 @@ class LoginSosmedPage extends StatefulWidget {
 }
 
 class _LoginSosmedPageState extends State<LoginSosmedPage> {
+  final RegistrationData registrationData = RegistrationData();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,18 +91,18 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                   nameSosmed: "Google",
                   imageSosmed: "assets/images/logo_google.png",
                   onTap: () async {
-                    // final result = await AuthServices.signInWithGoogle();
-                    // if (result.user != null) {
-                    //   Get.off(() => ProfilePage(
-                    //         fullNameSosmed: result.user?.fullName,
-                    //       ));
-                    // } else {
-                    //   final errorMessage = result.message ??
-                    //       "Terjadi kesalahan saat masuk dengan Google";
-                    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    //     content: Text(errorMessage),
-                    //   ));
-                    // }
+                    final result = await AuthServices.signInWithGoogle();
+                    if (result.user != null) {
+                      Get.off(() => HomePage(
+                            fullNameSosmed: result.user?.fullName,
+                          ));
+                    } else {
+                      final errorMessage = result.message ??
+                          "Terjadi kesalahan saat masuk dengan Google";
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(errorMessage),
+                      ));
+                    }
                   },
                 ),
                 const SizedBox(
@@ -127,11 +128,9 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                 CustomButton(
                   nameButton: "Sign In With Password",
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SignInPage()));
-                    // Get.to(
-                    //   () => const SignInPage(),
-                    // );
+                    Get.to(
+                      () => const SignInPage(),
+                    );
                   },
                 ),
                 const SizedBox(
@@ -147,16 +146,11 @@ class _LoginSosmedPageState extends State<LoginSosmedPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SignUpPage()));
-
-                        // Get.to(
-                        //   () => SignUpPage(
-                        //     registrationData: registrationData,
-                        //   ),
-                        // );
+                        Get.to(
+                          () => SignUpPage(
+                            registrationData: registrationData,
+                          ),
+                        );
                       },
                       child: Text(
                         "Sign Up",

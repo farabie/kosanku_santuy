@@ -4,6 +4,7 @@ import 'package:kosanku_santuy/ui/pages/pages.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +20,7 @@ class KosanKuSantuy extends StatelessWidget {
     return StreamProvider<auth.User?>.value(
       initialData: null,
       value: AuthServices.userStream,
-      child: const MaterialApp(
+      child: const GetMaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashPage(),
       ),
