@@ -32,7 +32,7 @@ class TipsCard extends StatelessWidget {
             ),
             Text(
               "Updated ${tips.dateTips}",
-              style: greyTextFont,
+              style: greyTextFont.copyWith(color: greyColor3),
             ),
           ],
         ),

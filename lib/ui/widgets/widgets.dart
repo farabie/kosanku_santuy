@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kosanku_santuy/models/models.dart';
 import 'package:kosanku_santuy/shared/shared.dart';
+import 'package:get/get.dart';
+import 'package:kosanku_santuy/ui/pages/pages.dart';
 
 part 'custom_button_widget.dart';
 part 'custom_sosmed_widget.dart';

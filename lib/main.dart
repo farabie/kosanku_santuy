@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kosanku_santuy/providers/providers.dart';
 import 'package:kosanku_santuy/services/services.dart';
 import 'package:kosanku_santuy/ui/pages/pages.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -20,9 +21,12 @@ class KosanKuSantuy extends StatelessWidget {
     return StreamProvider<auth.User?>.value(
       initialData: null,
       value: AuthServices.userStream,
-      child: const GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: SplashPage(),
+      child: ChangeNotifierProvider(
+        create: (context) => SpaceProvider(),
+        child: const GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: SplashPage(),
+        ),
       ),
     );
   }
