@@ -70,12 +70,9 @@ class _SplashPageState extends State<SplashPage> {
 
   void checkFirebaseUser() {
     final firebaseUser = Provider.of<auth.User?>(context, listen: false);
+    print(firebaseUser);
     if (firebaseUser == null) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const LoginSosmedPage(),
-        ),
-      );
+      Get.off(() => LoginSosmedPage());
     } else {
       bool isGoogleSignIn = false;
       for (var userInfo in firebaseUser.providerData) {
@@ -86,18 +83,10 @@ class _SplashPageState extends State<SplashPage> {
       }
       if (isGoogleSignIn) {
         print('User is authenticated with Google.');
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => HomePage(),
-          ),
-        );
+        Get.off(() => HomePage());
       } else {
         print('User is not authenticated with Google.');
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const LoginSosmedPage(),
-          ),
-        );
+        Get.off(() => LoginSosmedPage());
       }
       setState(() {
         isLoading = false;
