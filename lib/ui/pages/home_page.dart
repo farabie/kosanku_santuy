@@ -182,8 +182,21 @@ class HomePage extends StatelessWidget {
                       }).toList(),
                     );
                   }
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return Column(
+                    children: <Widget>[
+                      CustomShimmerCity(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      CustomShimmerCity(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      CustomShimmerCity(),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
                   );
                 },
               ),
