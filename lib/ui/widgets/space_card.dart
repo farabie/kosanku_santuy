@@ -22,13 +22,15 @@ class SpaceCard extends StatelessWidget {
         children: <Widget>[
           ClipRRect(
             borderRadius: BorderRadius.circular(17),
-            child: SizedBox(
+            child: Container(
               width: 130,
               height: 110,
               child: Stack(
                 children: <Widget>[
                   Image.network(
                     space.imageUrl,
+                    width: 130,
+                    height: 110,
                     fit: BoxFit.cover,
                   ),
                   Align(
